@@ -1,0 +1,66 @@
+.header
+{
+    height:100%;
+    width:100%;
+    box-sizing: border-box;
+    padding:4em 4em 4em 28em;
+}
+body
+{
+
+    background-color:#24142c;
+    
+}
+.city-input
+{
+    height:45px;
+    width: 270px;
+    border-radius: 25px;
+    box-sizing: border-box;
+    padding:0px 0px 0px 40px;
+
+    /* color: #24142c; */
+   
+}
+.city-input::placeholder
+{
+    color: #24142c;
+    font-weight: medium;
+}
+.cmn-btn
+{
+    /* background-color: #6c64fb; */
+    /* background-color: #9e616b; */
+        background-color: #abaed3;
+    border-radius:15px;
+    height:40px;
+    width:80px;
+    
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    height:300px;
+    border-radius: 25px;
+    margin: auto;
+    text-align: left;
+    background-color: #748cf1;
+   
+    padding:2em 0em 2em 4em;
+  
+  }
+  
+
+  .err-card
+  {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 200px;
+    height:100px;
+    border-radius: 25px;
+    margin: auto;
+    text-align: left;
+    background-color: #748cf1;
+   
+    padding:2em 2em 0em 2em;
+  }

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Test</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <div class="header">
+
+        <form action="/" method="post">
+            <input name="city" type="text" class="city-input" id="city-input" placeholder="Weather in your city  "
+                required>
+            <input type="submit" class="cmn-btn" value="Search">
+        </form>
+    </div>
+    <% if(weather !=null){ %>
+        <div class="card">
+           
+            <h2>
+                <%=city%>,<%=country%>
+            </h2>
+            <h3 id="date-and-time"></h3>
+            <h3><%=temp%>&deg;c</h3>
+            <h3><%=tempminmax%></h3>
+            <h3><%=sit%></h3>
+            <h3><%=humidity%></h3>
+
+        </div>
+
+        <% } %>
+
+            <% if(errmsg !=null){ %>
+                <div class="err-card">
+                    
+                    <p>Please Enter the Correct City!!</p>
+                </div>
+                    
+                
+                <% } %>
+
+                    </div>
+                    <script>
+                        const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const d = new Date();
+        let day = weekday[d.getDay()];
+        const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        let name = month[d.getMonth()];
+        let str = "";
+        str+=d.getDate()+" ";
+        str += name;
+        str += " , ";
+        str += day;
+        str += " , ";
+        var x=d.getHours();
+        var set=true;
+        if(x>=12)
+        {
+            x-=12;
+            str+=x;
+                set=false;
+        }
+        str += ":";
+        str += d.getMinutes();
+        if(set)str+=" am."
+        else str+=" pm.";
+        document.getElementById('date-and-time').innerHTML =str;
+
+                    </script>
+</body>
+
+</html>
