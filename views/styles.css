@@ -69,6 +69,10 @@ body {
     padding: 1em 0em 1em 4em;
 
 }
+.card>h2
+{
+    margin-bottom:3px;
+}
 .card>h3{
     margin: 7px 0px 7px 0px;
 }
