@@ -6,68 +6,111 @@
     <title>Test</title>
     <link rel="stylesheet" href="styles.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 </head>
 
 <body>
     <div class="header">
 
         <form action="/" method="post">
-            <input name="city" type="text" class="city-input" id="city-input" placeholder="Weather in your city  "
+            <input name="city" type="text" class="city-input" id="city-input" placeholder="Weather in your city ? "
                 required>
             <input type="submit" class="cmn-btn" value="Search">
         </form>
     </div>
     <% if(weather !=null){ %>
-        <div class="card">
-           
-            <h2>
-                <%=city%>,<%=country%>
-            </h2>
-            <h3 id="date-and-time"></h3>
-            <h3><%=temp%>&deg;c</h3>
-            <h3><%=tempminmax%></h3>
-            <h3><%=sit%></h3>
-            <h3><%=humidity%></h3>
+        <div class="card-container">
+            <div class="card">
 
+                <h2 id="city-input1">
+                    <%=city%>,<%=country%>
+                </h2>
+                <h3 id="date-and-time"></h3>
+                <h3>
+                    <%=temp%>&deg;c
+                </h3>
+
+                <h3>
+                    <%=tempmin%>&deg;c | <%=tempmax%>&deg;c
+                </h3>
+                <h3 id="coord_lon">Lon: <%=lon%>&deg;E
+                </h3>
+                <h3 id="coord_lat">Lat:<%=lat%>&deg;N
+                </h3>
+                <h3 id="description">
+
+                    <%=sit%>
+                </h3>
+                <h3>
+                    <%=humidity%>
+                </h3>
+
+            </div>
+            <div id="map"></div>
+            <style>
+                #map {
+                    margin: 6em 2em 2em 2em;
+                    width: 45%;
+                    height: 180px;
+                }
+            </style>
         </div>
-
         <% } %>
 
             <% if(errmsg !=null){ %>
                 <div class="err-card">
-                    
+
                     <p>Please Enter the Correct City!!</p>
                 </div>
-                    
-                
                 <% } %>
 
                     </div>
                     <script>
+                        let city = document.getElementById('city-input1').innerHTML;
+                        console.log(city);
+                        var lon = document.getElementById('coord_lon').innerHTML;
+                        var lat = document.getElementById('coord_lat').innerHTML;
+
+                        var lon_up = lon.substring(4, lon.length - 5);
+                        var lat_up = lat.substring(4, lat.length - 5);
+
+
+                        lon1 = parseFloat(lon_up);
+                        lat1 = parseFloat(lat_up);
+
+                        var map = L.map('map').setView([lat1, lon1], 9);
+                        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            maxZoom: 19,
+                            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                        }).addTo(map);
+                        var marker = L.marker([lat1, lon1]).addTo(map);
+                        marker.bindPopup(document.getElementById('description').innerHTML).openPopup();
                         const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        const d = new Date();
-        let day = weekday[d.getDay()];
-        const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        let name = month[d.getMonth()];
-        let str = "";
-        str+=d.getDate()+" ";
-        str += name;
-        str += " , ";
-        str += day;
-        str += " , ";
-        var x=d.getHours();
-        var set=true;
-        if(x>=12)
-        {
-            x-=12;
-            str+=x;
-                set=false;
-        }
-        str += ":";
-        str += d.getMinutes();
-        if(set)str+=" am."
-        else str+=" pm.";
-        document.getElementById('date-and-time').innerHTML =str;
+                        const d = new Date();
+                        let day = weekday[d.getDay()];
+                        const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                        let name = month[d.getMonth()];
+                        let str = "";
+                        str += d.getDate() + " ";
+                        str += name;
+                        str += " , ";
+                        str += day;
+                        str += " , ";
+                        var x = d.getHours();
+                        var set = true;
+                        if (x >= 12) {
+                            x -= 12;
+                            str += x;
+                            set = false;
+                        }
+                        str += ":";
+                        str += d.getMinutes();
+                        if (set) str += " am."
+                        else str += " pm.";
+                        document.getElementById('date-and-time').innerHTML = str;
 
                     </script>
 </body>
